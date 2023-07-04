@@ -27,6 +27,9 @@ window.addEventListener("load", function () {
   window.addEventListener("beforeunload", function () {
     let timeSite = new Date() - time
     let timeSiteSec = (sec = Math.floor((timeSite / 1000) % 60))
-    window.sessionStorage.setItem("timeSiteinSec", `${timeSiteSec} secondi`)
+    if (sessionStorage.getItem("timeSiteinSec") === null) {
+      sessionStorage.setItem("timeSiteinSec", `${timeSiteSec} secondi`)
+    } else {
+    }
   })
 })
