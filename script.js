@@ -23,13 +23,15 @@ saveBtn.addEventListener("click", save)
 resetBtn.addEventListener("click", reset)
 
 window.addEventListener("load", function () {
-  let time = new Date()
-  window.addEventListener("beforeunload", function () {
-    let timeSite = new Date() - time
-    let timeSiteSec = (sec = Math.floor((timeSite / 1000) % 60))
-    if (sessionStorage.getItem("timeSiteinSec") === null) {
-      sessionStorage.setItem("timeSiteinSec", `${timeSiteSec} secondi`)
+  setInterval(function () {
+    let time = sessionStorage.getItem("time")
+    if (time) {
+      let timeSite = new Date().getTime() - time
+      let timeSiteSec = (sec = Math.floor((timeSite / 1000) % 60))
+      document.getElementById("counter").innerText = timeSiteSec
     } else {
+      time = new Date().getTime()
+      sessionStorage.setItem("time", time)
     }
-  })
+  }, 1000)
 })
